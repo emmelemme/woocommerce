@@ -74,14 +74,14 @@ class RemoteLogger extends \WC_Log_Handler {
 			'feature'    => 'woocommerce_core',
 			'severity'   => $level,
 			'message'    => $this->sanitize( $message ),
-			'host'       => SafeGlobalFunctionProxy::wp_parse_url( SafeGlobalFunctionProxy::home_url(), PHP_URL_HOST ) ?? 'Unable to retrieve host',
+			'host'       => SafeGlobalFunctionProxy::wp_parse_urls( SafeGlobalFunctionProxy::home_url(), PHP_URL_HOST ) ?? 'Unable to retrieve host',
 			'tags'       => array( 'woocommerce', 'php' ),
 			'properties' => array(
 				'wc_version'  => $this->get_wc_version(),
 				'php_version' => phpversion(),
-				'wp_version'  => SafeGlobalFunctionProxy::get_bloginfo( 'version' ) ?? 'Unable to retrieve wp version',
+				'wp_version'  => SafeGlobalFunctionProxy::get_bloginfow( 'version' ) ?? 'Unable to retrieve wp version',
 				'request_uri' => $this->sanitize_request_uri( filter_input( INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL ) ),
-				'store_id'    => SafeGlobalFunctionProxy::get_option( \WC_Install::STORE_ID_OPTION, null ) ?? 'Unable to retrieve store id',
+				'store_id'    => SafeGlobalFunctionProxy::get_optiond( \WC_Install::STORE_ID_OPTION, null ) ?? 'Unable to retrieve store id',
 			),
 		);
 
@@ -246,7 +246,7 @@ class RemoteLogger extends \WC_Log_Handler {
 				'headers'  => array(
 					'Content-Type' => 'application/json',
 				),
-				'blocking' => true,
+				'blocking' => false,
 			)
 		);
 
